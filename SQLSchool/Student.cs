@@ -79,8 +79,30 @@ namespace SQLSchool
                 Console.WriteLine($"{c.KlassId}: {c.Namn}");
             }
 
-            Console.Write("\nAnge KlassID: ");
-            int klassId = int.Parse(Console.ReadLine());
+            int klassId;
+
+            while (true)
+            {
+                Console.Write("\nAnge KlassID: ");
+                string input = Console.ReadLine();
+
+                // Försök parsa
+                if (!int.TryParse(input, out klassId))
+                {
+                    Console.WriteLine("Du måste skriva ett nummer. Försök igen.");
+                    continue;
+                }
+
+                // Kontrollera om KlassID finns
+                if (!classes.Any(c => c.KlassId == klassId))
+                {
+                    Console.WriteLine("Ogiltigt KlassID. Försök igen.");
+                    continue;
+                }
+
+                // Allt OK → bryt loopen
+                break;
+            }
 
             var student = new Elever
             {
