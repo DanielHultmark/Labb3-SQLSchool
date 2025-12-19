@@ -6,7 +6,7 @@ namespace SQLSchool
     {
         static void Main(string[] args)
         {
-            Menu.MainMenu();
+            Menu.MainMenu(); //Startar programmet
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SQLSchool
 {
     internal class Staff
     {
-        public static void StaffMenu()
+        public static void StaffMenu() //Personalmeny för val
         {
             Console.WriteLine($"1. All Personal\n" +
                 "2. Välj en peronal kategori\n" +
@@ -33,7 +33,7 @@ namespace SQLSchool
             }
         }
 
-        public static void ViewAllStaff()
+        public static void ViewAllStaff() //Visa all personal
         {
             using var context = new SQLSchoolDbContext();
 
@@ -45,7 +45,7 @@ namespace SQLSchool
             Menu.ReturnToMainMenu();
         }
 
-        public static void ViewStaffByCategory()
+        public static void ViewStaffByCategory() //Visa personal baserat på kategori
         {
             using var context = new SQLSchoolDbContext();
 

@@ -8,7 +8,7 @@ namespace SQLSchool
 {
     internal class Student
     {
-        public static void StudentMenu()
+        public static void StudentMenu() //Studentmeny för val
         {
             Console.WriteLine($"1. Se alla studenter\n" +
                 "2. Se studenter i en klass\n" +
@@ -34,7 +34,7 @@ namespace SQLSchool
             }
         }
 
-        public static void ViewAllStudents()
+        public static void ViewAllStudents() //Visa alla studenter
         {
             using var context = new SQLSchoolDbContext();
 
@@ -42,11 +42,11 @@ namespace SQLSchool
             foreach (var student in students)
             {
                 Console.WriteLine($"ID: {student.ElevId}, Namn: {student.Namn}");
-            }
-            return Menu.ReturnToMainMenu();
+            }            
+            Menu.ReturnToMainMenu();
         }
 
-        public static void ViewStudentsInClass()
+        public static void ViewStudentsInClass() //Visa studenter i en specifik klass
         {
             using var context = new SQLSchoolDbContext();
 
@@ -61,7 +61,7 @@ namespace SQLSchool
             Menu.ReturnToMainMenu();
         }
 
-        public static void AddStudent()
+        public static void AddStudent() //Lägg till en student
         {
             using var context = new SQLSchoolDbContext();
 

@@ -9,7 +9,7 @@ namespace SQLSchool
     internal class Menu
     {
 
-        public static void MainMenu() 
+        public static void MainMenu() //Huvudmeny för val av Student eller Personal
         {
             using var context = new SQLSchoolDbContext();
 
@@ -34,7 +34,7 @@ namespace SQLSchool
             }            
         }
         
-        public static void ReturnToMainMenu()
+        public static void ReturnToMainMenu() //Metod för att återgå till huvudmenyn
         {
             Console.WriteLine("Tryck på valfri knapp för att återgå till Huvudmenyn.");
             Console.ReadKey();
