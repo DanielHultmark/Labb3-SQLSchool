@@ -12,72 +12,71 @@ namespace SQLSchool.Methods
         //Metod för att sätta betyg på en elev i en kurs
         public static void SetGrade()
         {
-            using var context = new SQLSchoolDbContext();
+            using var context = new SQLSchoolDbContext();            
+
+            // Lista elever
+            foreach (var e in context.Elevers)
+                Console.WriteLine($"ElevID: {e.ElevId}, Namn: {e.Namn}");
+
+            Console.Write("Ange ElevID: ");
+            int elevId = int.Parse(Console.ReadLine());
+
+            // Lista kurser
+            foreach (var k in context.Kursers)
+                Console.WriteLine($"KursID: {k.KursId}, Namn: {k.Namn}");
+
+            Console.Write("Ange KursID: ");
+            int kursId = int.Parse(Console.ReadLine());
+
+            // Lista lärare
+            foreach (var l in context.Personals)
+                Console.WriteLine($"LärareID: {l.PersonalId}, Namn: {l.Namn}");
+
+            Console.Write("Ange LärareID: ");
+            int larareId = int.Parse(Console.ReadLine());
+
+            Console.Write("Ange betyg (A–E): ");
+            string betyg = Console.ReadLine().ToUpper();
+
+            // Kontrollera att allt finns
+            var elev = context.Elevers.FirstOrDefault(e => e.ElevId == elevId);
+            var kurs = context.Kursers.FirstOrDefault(k => k.KursId == kursId);
+            var larare = context.Personals.FirstOrDefault(l => l.PersonalId == larareId);
+
+            if (elev == null || kurs == null || larare == null)
+            {
+                Console.WriteLine("Felaktigt ID angivet.");
+                return;
+            }
+
+            // Nu börjar transaktionen
             using var transaction = context.Database.BeginTransaction();
 
             try
             {
-                Console.Write("Ange ElevID: ");
-                int elevId = int.Parse(Console.ReadLine());
-
-                Console.Write("Ange KursID: ");
-                int kursId = int.Parse(Console.ReadLine());
-
-                Console.Write("Ange LärareID: ");
-                int larareId = int.Parse(Console.ReadLine());
-
-                Console.Write("Ange betyg (A–E): ");
-                string betyg = Console.ReadLine().ToUpper();
-
-                // Kontrollera att elev finns
-                var elev = context.Elevers.FirstOrDefault(e => e.ElevId == elevId);
-                if (elev == null)
-                {
-                    Console.WriteLine("Elev hittades inte.");
-                    return;
-                }
-
-                // Kontrollera att kurs finns
-                var kurs = context.Kursers.FirstOrDefault(k => k.KursId == kursId);
-                if (kurs == null)
-                {
-                    Console.WriteLine("Kurs hittades inte.");
-                    return;
-                }
-
-                // Kontrollera att lärare finns
-                var larare = context.Personals.FirstOrDefault(l => l.PersonalId == larareId);
-                if (larare == null)
-                {
-                    Console.WriteLine("Lärare hittades inte.");
-                    return;
-                }
-
-                // Skapa betyg
                 var nyttBetyg = new Betyg
                 {
                     ElevId = elevId,
                     KursId = kursId,
                     LärareId = larareId,
                     Betyg1 = betyg,
-                    Datum = DateOnly.FromDayNumber(DateTime.Now.DayOfYear)
+                    Datum = DateOnly.FromDateTime(DateTime.Now)
                 };
 
                 context.Betygs.Add(nyttBetyg);
                 context.SaveChanges();
-
-                // Allt gick bra - commit
                 transaction.Commit();
 
-                Console.WriteLine($"Betyg {betyg} satt på elev {elev.Namn} i kurs {kurs.Namn}.");
+                Console.WriteLine("Betyg sparat!");
             }
             catch (Exception ex)
             {
-                // Något gick fel - rollback
                 transaction.Rollback();
-                Console.WriteLine("Ett fel uppstod. Inga ändringar sparades.");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Fel: " + ex.Message);
             }
+
+            Console.WriteLine($"Betyg {betyg} satt på elev {elev.Namn} i kurs {kurs.Namn}.");  
+            Menu.ReturnToMainMenu();
         }
 
         //Metod för att visa alla aktiva kurser
@@ -148,6 +147,7 @@ namespace SQLSchool.Methods
                     Console.WriteLine("Inga betyg registrerade.");
                 }
             }
+            Menu.ReturnToMainMenu();
         }
 
 

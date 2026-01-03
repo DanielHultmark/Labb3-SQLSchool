@@ -15,6 +15,7 @@ namespace SQLSchool
             bool run = true;
             while (run)
             {
+                Console.Clear();
                 Console.WriteLine($"Gör något av följande val:\n" +
                     "1. Studenter\n" +
                     "2. Personal\n" +

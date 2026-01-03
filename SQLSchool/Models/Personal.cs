@@ -11,6 +11,8 @@ public partial class Personal
 
     public int BefattningId { get; set; }
 
+    public DateOnly? Anställningsdatum { get; set; }
+
     public virtual Befattning Befattning { get; set; } = null!;
 
     public virtual ICollection<Betyg> Betygs { get; set; } = new List<Betyg>();
