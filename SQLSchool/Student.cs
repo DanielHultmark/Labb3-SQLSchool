@@ -1,4 +1,6 @@
-﻿using SQLSchool.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SQLSchool.Data;
+using SQLSchool.Methods;
 using SQLSchool.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,9 @@ namespace SQLSchool
         {
             Console.WriteLine($"1. Se alla studenter\n" +
                 "2. Se studenter i en klass\n" +
-                "3. Lägg till en student");
+                "3. Lägg till en student\n" +
+                "4. Visa alla aktiva klasser\n" +
+                "5. Visa alla stundenter och betyg");
             switch (Console.ReadLine())
             {
                 case "1":
@@ -26,6 +30,14 @@ namespace SQLSchool
                 case "3":
                     Console.Clear();
                     AddStudent();
+                    break;
+                case "4":
+                    Console.Clear();
+                    NewMethods.ShowActiveCourses();                    
+                    break;
+                case "5":
+                    Console.Clear();
+                    NewMethods.ShowAllStudentsInfo();
                     break;
                 default:
                     Console.WriteLine("Ogiltigt val, försök igen.");
@@ -100,7 +112,7 @@ namespace SQLSchool
                     continue;
                 }
 
-                // Allt OK → bryt loopen
+                // Allt OK - bryt loopen
                 break;
             }
 
@@ -117,6 +129,9 @@ namespace SQLSchool
             Console.WriteLine($"\nStudenten {namn} har lagts till i klass {klassId}.");
             Menu.ReturnToMainMenu();
         }
+
+        
+
 
 
     }

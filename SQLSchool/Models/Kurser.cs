@@ -9,5 +9,9 @@ public partial class Kurser
 
     public string Namn { get; set; } = null!;
 
+    public DateOnly? Startdatum { get; set; }
+
+    public DateOnly? Slutdatum { get; set; }
+
     public virtual ICollection<Betyg> Betygs { get; set; } = new List<Betyg>();
 }

@@ -1,4 +1,5 @@
 ﻿using SQLSchool.Data;
+using SQLSchool.Methods;
 
 namespace SQLSchool
 {

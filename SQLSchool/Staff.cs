@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLSchool.Data;
+using SQLSchool.Methods;
 
 namespace SQLSchool
 {
@@ -11,7 +12,9 @@ namespace SQLSchool
         {
             Console.WriteLine($"1. All Personal\n" +
                 "2. Välj en peronal kategori\n" +
-                "3. Återgå till Huvudmenyn");
+                "3. Se antal personal per avdelning\n" +
+                "4. Sätt betyg\n" +
+                "5. Återgå till Huvudmenyn");
             switch (Console.ReadLine())
                 {
                 case "1":
@@ -23,6 +26,14 @@ namespace SQLSchool
                     ViewStaffByCategory();
                     break;
                 case "3":
+                    Console.Clear();
+                    NewMethods.DepartmentStaffCount();
+                    break;
+                case "4":
+                    Console.Clear();
+                    NewMethods.SetGrade();
+                    break;
+                case "5":
                     Console.Clear();
                     Menu.ReturnToMainMenu();
                     break;
@@ -60,5 +71,6 @@ namespace SQLSchool
             }
             Menu.ReturnToMainMenu();
         }
+        
     }
 }
